@@ -1,25 +1,18 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Routers from './routes';
+import axiosInstance from './service/httpService'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const token=JSON.parse(localStorage.getItem('token'))
+  axiosInstance.interceptors.request.use(async (config) => {
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  });
+  return <Routers/>
 }
 
 export default App;
