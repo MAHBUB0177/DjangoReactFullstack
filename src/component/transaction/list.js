@@ -2,7 +2,7 @@ import { Space, Tooltip ,Table, Button, Input, Form} from 'antd';
 import moment from 'moment/moment';
 import React, { useEffect, useState } from 'react'
 import { FiEdit } from "react-icons/fi";
-import ReactPaginate from 'react-paginate';
+// import ReactPaginate from 'react-paginate';
 import { GetPaymentType } from '../../service';
 import { BankList_Type, payment_typeList } from '../common/function';
 
@@ -10,9 +10,8 @@ const List = () => {
   const [loading, setLoading] = useState(false);
   const [data,setData]=useState()
   console.log(data,'data')
-  const [CurrentPageNumber,setCurrentPageNumber]=useState(1)
-  const[searchTerm,setSearchTerm]=useState('')
-  console.log('first',searchTerm)
+  // const[searchTerm,setSearchTerm]=useState('')
+  // console.log('first',searchTerm)
 
   const listData=async()=>{
     setLoading(true)
@@ -30,11 +29,11 @@ const List = () => {
   }
   
 
-  const onFinish=()=>{
-    console.log('000000')
+  const onFinish=(value)=>{
+    console.log(value,'000000')
     const keys=['check_bank','reference_no','payment_amount']
    const res=data.filter((item,index) => 
-   keys.some((key)=>item[key].toLowerCase().includes(searchTerm))
+   keys.some((key)=>item[key].toLowerCase().includes(value?.searchTerm))
   //  item?.check_bank.toLowerCase().includes(searchTerm) 
   //  ||  item?.reference_no?.toLowerCase().includes(searchTerm) || item?.payment_amount?.toLowerCase().includes(searchTerm) 
    )
@@ -137,13 +136,13 @@ listData()
   return (
     <>
     <Form onFinish={onFinish} id='form_data'>
-    <div className='flex flex-row justify-end gap-4'>
+    <div className='flex flex-col flex-wrap md:flex-row justify-end gap-4'>
             <div>
                 <Form.Item
-                name="Search"
+                name="searchTerm"
                 rules={[
                   {
-                    required: true,
+                    required: false,
                     message: "Please input your username!",
                   },
                 ]}
@@ -154,9 +153,10 @@ listData()
                      height: "40px",
                    }}
                    placeholder="Reference NO/Payment Amount"
-                   onChange={(e)=>{
-                    setSearchTerm(e.target.value)
-                   }}
+                  //  onChange={(e)=>{
+                  //   setSearchTerm(e.target.value)
+                  //  }}
+
                   
                  />
       
@@ -189,26 +189,6 @@ listData()
         rowKey={dataSource => dataSource.id}
       />
 
-                  {/* <ReactPaginate
-                        previousLabel={"previous"}
-                        // forcePage={currentPageNumber - 1}
-                        nextLabel={"next"}
-                        breakLabel={"..."}
-                        // pageCount={pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={3}
-                        onPageChange={handlePageClick}
-                        containerClassName={"pagination justify-content-center"}
-                        pageClassName={"page-item"}
-                        pageLinkClassName={"page-link"}
-                        previousClassName={"page-item"}
-                        previousLinkClassName={"page-link"}
-                        nextClassName={"page-item"}
-                        nextLinkClassName={"page-link"}
-                        breakClassName={"page-item"}
-                        breakLinkClassName={"page-link"}
-                        activeClassName={"active"}
-                      /> */}
     </>
   )
 }

@@ -9,6 +9,7 @@ import Update from '../page/update';
 import Private from './privet';
 const Routers = () => {
   return (
+    
          <Routes>
              <Route path="/" element={<Login />} />
              <Route

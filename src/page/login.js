@@ -30,7 +30,7 @@ login(payload)
   }
  })
  .catch((error)=>{
-  console.log(error)
+  // console.log(error)
  })
   };
 

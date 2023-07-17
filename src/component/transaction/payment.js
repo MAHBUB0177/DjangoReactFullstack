@@ -4,13 +4,12 @@ import { createTransction, GetBankAccount, requestType } from '../../service'
 import Bankdeposit from './bankDeposit'
 import BankTransfer from './bankTransfer'
 import Cheque from './cheque'
-import{domain} from '../../env'
 
 const Payment = () => {
     const[paymentType,setPaymentType]=useState()
     const[bankAcc,setBankAcc]=useState()
-    console.log('first',bankAcc)
 
+//set paylod all from submit
    const [payload,setPyload]=useState({
     payment_id:Math.floor(Math.random() * 16),
     payment_type:1,
@@ -21,7 +20,6 @@ const Payment = () => {
     bank_account:'',
     branch:''
    })
-   console.log(payload,'payload')
 
     const GetpaymentType=()=>{
         requestType().then((res)=>{
@@ -105,7 +103,10 @@ const Payment = () => {
                         });
                       }}
                       options={result}
-                    ></Select>
+                    >
+
+                     
+                    </Select>
                   </Form.Item>
 
             </div>

@@ -120,13 +120,13 @@ class CreateProductisView(APIView):
         product.stock_limit=request.data['stock_limit']
         product.app_data_time=request.data['purchase_date']
         product.save()
-        response_data = {"error":False,"message":"User Data is Updated"}
+        response_data = {"error":False,"message":"product Data is created"}
         return Response(response_data)
 
 class UpdateProductisView(APIView):
     def post(self, request):
         product = Ecom_Products.objects.get(product_id=request.data['product_id'])
-        product.product_name=request.data['product_name']
+        product.product_name=request.data['product_name'] 
         product.product_model=request.data['product_model']
         product.product_price=request.data['product_price']
         product.discount_amount=request.data['discount_amount']
@@ -139,14 +139,15 @@ class UpdateProductisView(APIView):
         product.sub_category_id=sub_category_obj
         product.stock_limit=request.data['stock_limit']
         product.save()
-        response_data = {"error":False,"message":"User Data is Updated"}
+        response_data = {"error":False,"message":"product Data is Updated"}
         return Response(response_data)
 
-class deleteproductView (APIView):
-    def post(self,request):
+
+
+class deleteproductView(APIView):
+    def post(self, request):
+        print(request.data['id'],'kiiiiiiiiiiii')
         data={}
-        print('data delete',request.data['id'])
-        product = Ecom_Products.objects.get(product_id=request.data['id'])
-        print(product)
+        Ecom_Products.objects.get(product_id=request.data['id']).delete()
         data['success_message']='delete product successfully'
         return Response(data)

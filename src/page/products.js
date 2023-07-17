@@ -124,9 +124,12 @@ const Products = () => {
     }
 
     const hadeldeleteitem=(id)=>{
-      
-      DeleteProduct(id).then((res)=>{
-        message.success('delete successfully')
+      let payload={
+        id:id
+      }
+      DeleteProduct(payload).then((res)=>{
+        console.log(res,'0000089755432')
+        message.success('product delete successfully')
       })
 
     }

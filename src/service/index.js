@@ -64,6 +64,8 @@ let url = `api/updateproducts/`;
 return axiosInstance.post(url, payload);
 };
 
+
+//deleyte items
 export const DeleteProduct = (payload) => {
   console.log(payload,'payload00000000')
 let url = `api/deleteproducts/`;
